@@ -21,6 +21,7 @@ h1{font-size:32px}
 h2{font-size:14px;font-family:var(--san);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:34px 0 10px}
 .hero{text-align:center;padding:36px 0 26px}
 .av{width:84px;height:84px;border-radius:50%;background:var(--bt);border:1px solid var(--line);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font:600 34px var(--ser);color:var(--acc)}
+.avi{width:84px;height:84px;border-radius:50%;object-fit:cover;border:1px solid var(--line);margin:0 auto 16px;display:block}
 .hero p{color:var(--mut);margin:10px 0 0}
 .cat{font-size:12px;letter-spacing:.08em;color:var(--acc);font-weight:600;text-transform:uppercase}
 .meta{font-size:13px;color:var(--mut)}
@@ -75,7 +76,7 @@ const card=a=>'<a class="al" href="#/yazi/'+esc(a.id)+'"><div class="tx"><div cl
 function ep(e){const au=e.audio&&okU(e.audio),ln=e.url&&okU(e.url);
 return '<div class="ep"><div><b>'+esc(e.title)+'</b><div class="meta">'+fmt(e.date)+(e.dur?' · '+esc(e.dur):'')+'</div></div>'+(!au&&ln?'<a class="btn" href="'+esc(e.url)+'" target="_blank" rel="noopener">Dinlə</a>':'')+'</div>'+(au?'<audio controls preload="none" src="'+esc(e.audio)+'"></audio>':'')}
 function home(){const [f,...r]=D.articles;
-return '<section class="hero"><div class="av">Z</div><h1>'+esc(D.hero.title)+'</h1><p>'+esc(D.hero.text)+'</p></section><h2>Yazılar</h2>'+
+return '<section class="hero">'+(D.photo&&okU(D.photo)?'<img class="avi" src="'+esc(D.photo)+'" alt="">':'<div class="av">Z</div>')+'<h1>'+esc(D.hero.title)+'</h1><p>'+esc(D.hero.text)+'</p></section><h2>Yazılar</h2>'+
 (f?'<a class="big" href="#/yazi/'+esc(f.id)+'">'+(f.image&&okU(f.image)?'<img class="hc" src="'+esc(f.image)+'" alt="">':'')+'<div class="cat">'+esc(f.cat)+'</div><h3>'+esc(f.title)+'</h3><p style="color:var(--mut)">'+esc(f.summary)+'</p><div class="meta">'+fmt(f.date)+' · '+mins(f.body)+' dəq oxu</div></a>':'<p class="meta">Hələ yazı yoxdur.</p>')+
 '<div style="margin-top:14px">'+r.slice(0,3).map(card).join('')+'</div><p><a class="btn" href="#/yazilar">Bütün yazılar</a></p>'+
 '<h2>Podkastlar</h2><div class="box">'+(D.pods.slice(0,3).map(ep).join('')||'<p class="meta">Hələ epizod yoxdur.</p>')+'<div class="pl">'+links(['spotify','apple','youtube'])+'</div></div>'}
