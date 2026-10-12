@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>zehraekperzade</title>
+<meta name="description" content="Zəhranın şəxsi jurnalist saytı: yazılar və podkastlar.">
+<style>
+:root{--bg:#fffefb;--fg:#1c1b19;--mut:#6d6a63;--line:#e6e3dc;--card:#f5f3ee;--acc:#a3361d;--ser:Georgia,'Times New Roman',serif;--san:system-ui,-apple-system,'Segoe UI',sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#161513;--fg:#efece5;--mut:#a09c92;--line:#2c2a26;--card:#201f1c;--acc:#e8826a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 var(--san)}
+a{color:inherit;text-decoration:none}
+.w{max-width:720px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line)}
+.logo{display:inline-block;font:600 22px var(--ser);letter-spacing:.3px;padding:16px 0 8px}
+nav{display:flex;gap:18px;overflow-x:auto;white-space:nowrap;padding:6px 0 12px;font-size:14px;color:var(--mut)}
+nav a.on{color:var(--fg);font-weight:600;border-bottom:2px solid var(--fg);padding-bottom:3px}
+h1,h2,h3{font-family:var(--ser);line-height:1.25;font-weight:600;margin:0}
+h1{font-size:32px}
+h2{font-size:14px;font-family:var(--san);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:34px 0 10px}
+.hero{text-align:center;padding:36px 0 26px}
+.av{width:84px;height:84px;border-radius:50%;background:var(--card);border:1px solid var(--line);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font:600 34px var(--ser);color:var(--acc)}
+.hero p{color:var(--mut);margin:10px 0 0}
+.cat{font-size:12px;letter-spacing:.08em;color:var(--acc);font-weight:600;text-transform:uppercase}
+.meta{font-size:13px;color:var(--mut)}
+.big h3{font-size:26px;margin:6px 0}
+.al{display:block;padding:16px 0;border-top:1px solid var(--line)}
+.al h3{font-size:19px;margin:4px 0}
+.al p{margin:4px 0;color:var(--mut);font-size:15px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:10px 0}
+.ep{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--line)}
+.ep:first-child{border-top:0}
+.ep b{font-family:var(--ser);font-weight:600}
+.pl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pl a,.btn{font:500 14px var(--san);border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:7px 12px;display:inline-block}
+audio{width:100%;margin:0 0 8px}
+.body{font:18px/1.8 var(--ser)}
+.body p,.body ul{margin:0 0 1.1em}
+.body h3{font-size:22px;margin:1.4em 0 .5em}
+.pf{width:132px;height:132px;border-radius:50%;object-fit:cover;border:1px solid var(--line);display:block;margin:18px 0 0}
+.body img,.cover{max-width:100%;border-radius:8px}
+.body a{text-decoration:underline}
+footer{border-top:1px solid var(--line);margin-top:44px;padding:22px 0 30px;text-align:center;color:var(--mut);font-size:13px}
+footer .pl{justify-content:center}
+</style>
+</head>
+<body>
+<header><div class="w">
+<a class="logo" href="#/" id="logo">zehraekperzade</a>
+<nav id="nav"><a href="#/" data-p="">Ana səhifə</a><a href="#/yazilar" data-p="yazilar">Yazılar</a><a href="#/podkastlar" data-p="podkastlar">Podkastlar</a><a href="#/haqqimda" data-p="haqqimda">Haqqımda</a><a href="#/elaqe" data-p="elaqe">Əlaqə</a></nav>
+</div></header>
+<main class="w" id="app"><p style="margin-top:30px;color:var(--mut)">Yüklənir…</p></main>
+<footer><div class="w"><div class="pl" id="fl"></div><p>© <span id="fn">zehraekperzade</span></p></div></footer>
+<script>
+let D=null;
+const app=document.getElementById('app');
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const okU=u=>/^(https?:\/\/|\/(?!\/)|mailto:)/i.test(u||'');
+const slug=s=>(String(s).toLowerCase().replace(/ə/g,'e').replace(/ı/g,'i').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))||'yazi';
+const fmt=d=>{try{return new Date(d).toLocaleDateString('az',{day:'numeric',month:'long',year:'numeric'})}catch(e){return d}};
+const mins=t=>Math.max(1,Math.round(String(t||'').split(/\s+/).length/180));
+function inl(s){return s
+.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g,(_,a,u)=>okU(u)?'<img src="'+u+'" alt="'+a+'">':'')
+.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,(_,a,u)=>okU(u)?'<a href="'+u+'" target="_blank" rel="noopener">'+a+'</a>':a)
+.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\*([^*]+)\*/g,'<em>$1</em>')}
+function md(t){return esc(String(t||'').replace(/\r/g,'')).split(/\n{2,}/).map(x=>{x=x.trim();if(!x)return '';let m;
+if(m=x.match(/^#{1,6}\s+(.*)$/))return '<h3>'+inl(m[1])+'</h3>';
+if(/^[-*]\s/.test(x))return '<ul>'+x.split('\n').map(l=>'<li>'+inl(l.replace(/^[-*]\s+/,''))+'</li>').join('')+'</ul>';
+return '<p>'+inl(x).replace(/\n/g,'<br>')+'</p>'}).join('')}
+const LN={email:'E-poçt',instagram:'Instagram',x:'X',telegram:'Telegram',spotify:'Spotify',apple:'Apple Podcasts',youtube:'YouTube'};
+const hr=(k,v)=>k==='email'?'mailto:'+v:v;
+function links(keys){return Object.keys(LN).filter(k=>keys.includes(k)&&D.links&&D.links[k]&&okU(hr(k,D.links[k]))).map(k=>'<a href="'+esc(hr(k,D.links[k]))+'" target="_blank" rel="noopener">'+LN[k]+'</a>').join('')}
+const card=a=>'<a class="al" href="#/yazi/'+esc(a.id)+'"><div class="cat">'+esc(a.cat)+'</div><h3>'+esc(a.title)+'</h3><p>'+esc(a.summary)+'</p><div class="meta">'+fmt(a.date)+' · '+mins(a.body)+' dəq oxu</div></a>';
+function ep(e){const au=e.audio&&okU(e.audio),ln=e.url&&okU(e.url);
+return '<div class="ep"><div><b>'+esc(e.title)+'</b><div class="meta">'+fmt(e.date)+(e.dur?' · '+esc(e.dur):'')+'</div></div>'+(!au&&ln?'<a class="btn" href="'+esc(e.url)+'" target="_blank" rel="noopener">Dinlə</a>':'')+'</div>'+(au?'<audio controls preload="none" src="'+esc(e.audio)+'"></audio>':'')}
+function home(){const [f,...r]=D.articles;
+return '<section class="hero"><div class="av">Z</div><h1>'+esc(D.hero.title)+'</h1><p>'+esc(D.hero.text)+'</p></section><h2>Yazılar</h2>'+
+(f?'<a class="big" href="#/yazi/'+esc(f.id)+'"><div class="cat">'+esc(f.cat)+'</div><h3>'+esc(f.title)+'</h3><p style="color:var(--mut)">'+esc(f.summary)+'</p><div class="meta">'+fmt(f.date)+' · '+mins(f.body)+' dəq oxu</div></a>':'<p class="meta">Hələ yazı yoxdur.</p>')+
+'<div style="margin-top:14px">'+r.slice(0,3).map(card).join('')+'</div><p><a class="btn" href="#/yazilar">Bütün yazılar</a></p>'+
+'<h2>Podkastlar</h2><div class="box">'+(D.pods.slice(0,3).map(ep).join('')||'<p class="meta">Hələ epizod yoxdur.</p>')+'<div class="pl">'+links(['spotify','apple','youtube'])+'</div></div>'}
+const articles=()=>'<h1 style="margin-top:30px">Yazılar</h1><div style="margin-top:14px">'+(D.articles.map(card).join('')||'<p class="meta">Hələ yazı yoxdur.</p>')+'</div>';
+function article(id){const a=D.articles.find(x=>x.id===id);if(!a)return '<p style="margin-top:30px">Yazı tapılmadı. <a class="btn" href="#/yazilar">Yazılara qayıt</a></p>';
+return '<article style="margin-top:30px"><div class="cat">'+esc(a.cat)+'</div><h1 style="margin:6px 0 8px">'+esc(a.title)+'</h1><div class="meta">Zəhra · '+fmt(a.date)+' · '+mins(a.body)+' dəq oxu</div>'+(a.image&&okU(a.image)?'<p><img class="cover" src="'+esc(a.image)+'" alt=""></p>':'')+'<div class="body" style="margin-top:22px">'+md(a.body)+'</div><p><a class="btn" href="#/yazilar">Bütün yazılar</a></p></article>'}
+const pods=()=>'<h1 style="margin-top:30px">Podkastlar</h1><div class="pl">'+links(['spotify','apple','youtube'])+'</div><div style="margin-top:14px">'+(D.pods.map(ep).join('')||'<p class="meta">Hələ epizod yoxdur.</p>')+'</div>';
+const about=()=>'<h1 style="margin-top:30px">Haqqımda</h1>'+(D.photo&&okU(D.photo)?'<img class="pf" src="'+esc(D.photo)+'" alt="'+esc(D.siteName)+'">':'')+'<div class="body" style="margin-top:18px">'+md(D.about)+'</div>';
+const contact=()=>'<h1 style="margin-top:30px">Əlaqə</h1><div class="pl" style="margin-top:16px">'+(links(['email','instagram','x','telegram'])||'<span class="meta">Əlaqə linkləri hələ əlavə olunmayıb.</span>')+'</div>';
+const V={'':home,yazilar:articles,podkastlar:pods,haqqimda:about,elaqe:contact};
+function route(){if(!D)return;const [p,id]=location.hash.replace(/^#\/?/,'').split('/');
+const art=p==='yazi'?D.articles.find(x=>x.id===id):null;
+app.innerHTML=p==='yazi'?article(id):(V[p]||home)();
+const cur=p==='yazi'?'yazilar':(V[p]?p:'');
+document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.p===cur));
+document.getElementById('fl').innerHTML=links(['instagram','x','telegram','email']);
+document.getElementById('logo').textContent=D.siteName;document.getElementById('fn').textContent=D.siteName;document.title=(art?art.title+' · ':'')+D.siteName;window.scrollTo(0,0)}
+const byDate=(x,y)=>String(y.date).localeCompare(String(x.date));
+async function load(){try{
+const [s,a,p]=await Promise.all(['site','articles','pods'].map(n=>fetch('content/'+n+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()})));
+D={siteName:s.siteName||'zehraekperzade',photo:s.photo||'',hero:s.hero||{title:'',text:''},about:s.about||'',links:s.links||{},
+articles:(a.items||[]).map(x=>({...x,id:slug(x.title)})).sort(byDate),pods:(p.items||[]).slice().sort(byDate)};route()
+}catch(e){app.innerHTML='<p style="margin-top:30px">Məzmunu yükləmək alınmadı. Səhifəni yeniləyin.</p>'}}
+window.addEventListener('hashchange',route);load();
+</script>
+</body>
+</html>

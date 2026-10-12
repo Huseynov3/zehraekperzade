@@ -1,0 +1,68 @@
+backend:
+  name: github
+  repo: GITHUB-ISTIFADECI-ADI/REPO-ADI
+  branch: main
+
+media_folder: uploads
+public_folder: /uploads
+
+collections:
+  - name: sayt
+    label: zehraekperzade
+    format: json
+    files:
+      - name: yazilar
+        label: Yazılar
+        file: content/articles.json
+        fields:
+          - label: Yazılar
+            name: items
+            widget: list
+            add_to_top: true
+            summary: "{{fields.date}} · {{fields.title}}"
+            fields:
+              - { label: Başlıq, name: title, widget: string }
+              - { label: Kateqoriya, name: cat, widget: string, hint: "Məsələn: Siyasət, İqtisadiyyat, Cəmiyyət, Mədəniyyət" }
+              - { label: Tarix, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+              - { label: Qısa giriş, name: summary, widget: text }
+              - { label: Şəkil, name: image, widget: image, required: false }
+              - { label: Mətn, name: body, widget: markdown }
+      - name: podkastlar
+        label: Podkastlar
+        file: content/pods.json
+        fields:
+          - label: Epizodlar
+            name: items
+            widget: list
+            add_to_top: true
+            summary: "{{fields.date}} · {{fields.title}}"
+            fields:
+              - { label: Başlıq, name: title, widget: string }
+              - { label: Tarix, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+              - { label: Müddət, name: dur, widget: string, required: false, hint: "Məsələn: 32:15" }
+              - { label: Audio faylın birbaşa linki, name: audio, widget: string, required: false }
+              - { label: Spotify və ya YouTube linki, name: url, widget: string, required: false }
+      - name: melumat
+        label: Sayt məlumatı
+        file: content/site.json
+        fields:
+          - { label: Saytın adı, name: siteName, widget: string, required: false, hint: "Yuxarıda və səhifənin altında görünən ad" }
+          - { label: Profil şəkli (Haqqımda səhifəsi üçün), name: photo, widget: image, required: false }
+          - label: Ana səhifə
+            name: hero
+            widget: object
+            fields:
+              - { label: Başlıq, name: title, widget: string }
+              - { label: Mətn, name: text, widget: string }
+          - { label: Haqqımda, name: about, widget: markdown }
+          - label: Əlaqə və platforma linkləri
+            name: links
+            widget: object
+            fields:
+              - { label: E-poçt ünvanı, name: email, widget: string, required: false }
+              - { label: Instagram linki, name: instagram, widget: string, required: false }
+              - { label: X linki, name: x, widget: string, required: false }
+              - { label: Telegram linki, name: telegram, widget: string, required: false }
+              - { label: Spotify linki, name: spotify, widget: string, required: false }
+              - { label: Apple Podcasts linki, name: apple, widget: string, required: false }
+              - { label: YouTube linki, name: youtube, widget: string, required: false }
