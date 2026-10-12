@@ -1,21 +1,18 @@
 <!doctype html>
-<html lang="az">
-<head>
-<meta charset="utf-8">
+<html lang="az"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<title>Admin · zehraekperzade</title>
+<meta name="robots" content="noindex"><title>Admin panel</title>
 <style>
-@media (max-width:799px){
 html,body{max-width:100vw;overflow-x:hidden}
-[class*=AppHeaderContent],[class*=AppMainContainer]{min-width:0!important;max-width:100vw!important;width:100%!important}
-[class*=CollectionContainer]{display:block!important;margin:12px!important}
-[class*=SidebarContainer]{position:static!important;width:100%!important;max-width:100%!important;max-height:none!important;margin-bottom:16px!important}
-[class*=CollectionMain]{padding-left:0!important;width:100%!important;max-width:100%!important}
+@media (max-width:900px){
+[class*="CollectionMain"]{padding-left:0!important;margin-left:0!important;width:100%!important;min-width:0!important}
+[class*="SidebarContainer"]{position:static!important;width:100%!important;max-width:100%!important;margin:0 0 16px!important;box-sizing:border-box}
+[class*="CollectionContainer"]{flex-direction:column!important;width:100%!important;min-width:0!important}
+[class*="AppMainContainer"]{min-width:0!important;width:100%!important}
+.ReactModal__Content,[class*="StyledModal"]{max-width:100vw!important;width:calc(100vw - 20px)!important;overflow-x:auto!important;box-sizing:border-box!important}
+[class*="RowContainer"],[class*="ButtonsContainer"],[class*="MediaLibraryTop"]{flex-wrap:wrap!important;height:auto!important;max-width:100%!important;gap:8px}
+[class*="MediaLibraryTop"] button,[class*="ButtonsContainer"] button{margin:0!important}
+[class*="EmptyMessage"],[class*="MediaLibraryCardGrid"]{max-width:100%!important;width:100%!important}
 }
-</style>
-</head>
-<body>
-<script src="https://unpkg.com/decap-cms@3.1.10/dist/decap-cms.js"></script>
-</body>
-</html>
+</style></head>
+<body><script src="https://unpkg.com/decap-cms@3.1.10/dist/decap-cms.js"></script></body></html>
