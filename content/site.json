@@ -1,3 +1,17 @@
-{"hero":{"title":"Hadisələrin arxasındakı hekayələr","text":"Mən Zəhra, jurnalistəm. Yazıram və danışıram."},
-"about":"Mən Zəhra, jurnalistəm. Siyasət, iqtisadiyyat və cəmiyyət mövzularında yazıram.\n\nBu mətni admin panelindən öz bioqrafiyanızla əvəz edin.",
-"links":{"email":"","instagram":"","x":"","telegram":"","spotify":"","apple":"","youtube":""}}
+{
+  "hero": {
+    "title": "Hadisələrin arxasındakı hekayələr",
+    "text": "Mən Zəhra, jurnalistəm. Yazıram və danışıram."
+  },
+  "about": "Mən Zəhra, jurnalistəm. Siyasət, iqtisadiyyat və cəmiyyət mövzularında yazıram.\n\nBu mətni admin panelindən öz bioqrafiyanızla əvəz edin.",
+  "links": {
+    "email": "",
+    "instagram": "",
+    "x": "",
+    "telegram": "",
+    "spotify": "",
+    "apple": "",
+    "youtube": ""
+  },
+  "photo": "/uploads/ekran-resmi-0008-10-13-01.03.48.png"
+}
